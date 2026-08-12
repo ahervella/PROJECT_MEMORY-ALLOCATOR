@@ -1,0 +1,14 @@
+TODO:
+- throw this on github
+    - bugs I ran into, like the namespace difference in free lol
+- answer why the default is so much slower?
+- what happens with different pool sizes?
+- How do I adapt this to be modular for other data types? Does the tutorial specify?
+- For the next allocator type, will want to adapt the customAllocator to an enum to switch amongst them, can iterate through all enums instead of listing each benchmark in main
+- try out anki setup
+- organize into source and include (where do .inl typically go, source?)
+
+After:
+- spend a day learning some cmake or make file basics
+- vim motions and apply to vsc?
+- add paps new suggestion of wargames to list
