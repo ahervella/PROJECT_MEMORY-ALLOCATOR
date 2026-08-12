@@ -798,5 +798,6 @@ CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h \
   /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/complex.h \
   /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/globalManager.h \
-  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/memoryManager.h \
-  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/memoryManager.inl
+  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/basicPoolMM.h \
+  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/iMemoryManager.h \
+  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/basicPoolMM.inl

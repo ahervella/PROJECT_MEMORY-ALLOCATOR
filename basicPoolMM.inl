@@ -1,15 +1,15 @@
-inline MemoryManager::MemoryManager()
+inline BasicPoolMM::BasicPoolMM()
 {
     m_freeStoreHead = 0;
     expandPoolSize();
 }
 
-inline MemoryManager::~MemoryManager()
+inline BasicPoolMM::~BasicPoolMM()
 {
     cleanUp();
 }
 
-inline void* MemoryManager::allocate(size_t)
+inline void* BasicPoolMM::allocate(size_t)
 {
     if (!m_freeStoreHead)
     {
@@ -21,7 +21,7 @@ inline void* MemoryManager::allocate(size_t)
     return head;
 }
 
-inline void MemoryManager::free(void* deleted)
+inline void BasicPoolMM::free(void* deleted)
 {
     FreeStore* head = static_cast<FreeStore*>(deleted);
     head->next = m_freeStoreHead;

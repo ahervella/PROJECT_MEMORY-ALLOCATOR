@@ -130,6 +130,30 @@ MemoryAllocator/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/build
 .PHONY : MemoryAllocator/fast
 
+basicPoolMM.o: basicPoolMM.cpp.o
+.PHONY : basicPoolMM.o
+
+# target to build an object file
+basicPoolMM.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o
+.PHONY : basicPoolMM.cpp.o
+
+basicPoolMM.i: basicPoolMM.cpp.i
+.PHONY : basicPoolMM.i
+
+# target to preprocess a source file
+basicPoolMM.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.i
+.PHONY : basicPoolMM.cpp.i
+
+basicPoolMM.s: basicPoolMM.cpp.s
+.PHONY : basicPoolMM.s
+
+# target to generate assembly for a file
+basicPoolMM.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.s
+.PHONY : basicPoolMM.cpp.s
+
 benchTest.o: benchTest.cpp.o
 .PHONY : benchTest.o
 
@@ -154,30 +178,6 @@ benchTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s
 .PHONY : benchTest.cpp.s
 
-memoryManager.o: memoryManager.cpp.o
-.PHONY : memoryManager.o
-
-# target to build an object file
-memoryManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o
-.PHONY : memoryManager.cpp.o
-
-memoryManager.i: memoryManager.cpp.i
-.PHONY : memoryManager.i
-
-# target to preprocess a source file
-memoryManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.i
-.PHONY : memoryManager.cpp.i
-
-memoryManager.s: memoryManager.cpp.s
-.PHONY : memoryManager.s
-
-# target to generate assembly for a file
-memoryManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.s
-.PHONY : memoryManager.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -187,12 +187,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MemoryAllocator"
+	@echo "... basicPoolMM.o"
+	@echo "... basicPoolMM.i"
+	@echo "... basicPoolMM.s"
 	@echo "... benchTest.o"
 	@echo "... benchTest.i"
 	@echo "... benchTest.s"
-	@echo "... memoryManager.o"
-	@echo "... memoryManager.i"
-	@echo "... memoryManager.s"
 .PHONY : help
 
 

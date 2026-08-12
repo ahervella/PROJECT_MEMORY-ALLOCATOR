@@ -1,6 +1,7 @@
-CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o: \
-  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/memoryManager.cpp \
-  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/memoryManager.h \
+CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o: \
+  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/basicPoolMM.cpp \
+  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/basicPoolMM.h \
+  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/iMemoryManager.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstddef \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \
@@ -113,7 +114,7 @@ CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
-  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/memoryManager.inl \
+  /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/basicPoolMM.inl \
   /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/complex.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_rsize_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm \

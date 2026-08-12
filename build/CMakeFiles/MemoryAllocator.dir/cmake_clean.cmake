@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o"
+  "CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o.d"
   "CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o"
   "CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o.d"
-  "CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o"
-  "CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o.d"
   "MemoryAllocator"
   "MemoryAllocator.pdb"
 )

@@ -72,10 +72,24 @@ include CMakeFiles/MemoryAllocator.dir/flags.make
 CMakeFiles/MemoryAllocator.dir/codegen:
 .PHONY : CMakeFiles/MemoryAllocator.dir/codegen
 
+CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o: CMakeFiles/MemoryAllocator.dir/flags.make
+CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o: /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/basicPoolMM.cpp
+CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o: CMakeFiles/MemoryAllocator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o -MF CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o.d -o CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o -c "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/basicPoolMM.cpp"
+
+CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/basicPoolMM.cpp" > CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.i
+
+CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/basicPoolMM.cpp" -o CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.s
+
 CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o: CMakeFiles/MemoryAllocator.dir/flags.make
 CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o: /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/benchTest.cpp
 CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o: CMakeFiles/MemoryAllocator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o -MF CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o.d -o CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o -c "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/benchTest.cpp"
 
 CMakeFiles/MemoryAllocator.dir/benchTest.cpp.i: cmake_force
@@ -86,30 +100,16 @@ CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/benchTest.cpp" -o CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s
 
-CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o: CMakeFiles/MemoryAllocator.dir/flags.make
-CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o: /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/memoryManager.cpp
-CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o: CMakeFiles/MemoryAllocator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o -MF CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o.d -o CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o -c "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/memoryManager.cpp"
-
-CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/memoryManager.cpp" > CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.i
-
-CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/memoryManager.cpp" -o CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.s
-
 # Object files for target MemoryAllocator
 MemoryAllocator_OBJECTS = \
-"CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o" \
-"CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o"
+"CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o" \
+"CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o"
 
 # External object files for target MemoryAllocator
 MemoryAllocator_EXTERNAL_OBJECTS =
 
+MemoryAllocator: CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o
 MemoryAllocator: CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o
-MemoryAllocator: CMakeFiles/MemoryAllocator.dir/memoryManager.cpp.o
 MemoryAllocator: CMakeFiles/MemoryAllocator.dir/build.make
 MemoryAllocator: CMakeFiles/MemoryAllocator.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable MemoryAllocator"

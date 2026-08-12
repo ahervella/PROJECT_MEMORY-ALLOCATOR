@@ -1,13 +1,15 @@
 #pragma once
 
-#include "memoryManager.h"
+#include "basicPoolMM.h"
 #include <stdlib.h>
+
+inline bool useCustomAllocator;
 
 inline void* customNew( size_t size )
 {
     if (useCustomAllocator)
     {
-        return gMemoryManager.allocate(size);
+        return gBasicPoolMM.allocate(size);
     }
     return malloc(size);
 }
@@ -20,7 +22,7 @@ inline void customDelete(void* pointerToDelete)
 {
     if (useCustomAllocator)
     {
-        return gMemoryManager.free(pointerToDelete);
+        return gBasicPoolMM.free(pointerToDelete);
     }
     return free(pointerToDelete);
 }

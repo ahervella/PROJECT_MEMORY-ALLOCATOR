@@ -1,10 +1,10 @@
-#include "memoryManager.h"
+#include "basicPoolMM.h"
 #include "complex.h"
 #include <algorithm>
 
 #define POOLSIZE 32
 
-void MemoryManager::expandPoolSize()
+void BasicPoolMM::expandPoolSize()
 {
     size_t size = std::max(sizeof(Complex), sizeof(FreeStore));
 
@@ -20,7 +20,7 @@ void MemoryManager::expandPoolSize()
     head->next = 0;
 }
 
-void MemoryManager::cleanUp()
+void BasicPoolMM::cleanUp()
 {
     while (m_freeStoreHead)
     {

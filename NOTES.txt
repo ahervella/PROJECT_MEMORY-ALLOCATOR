@@ -1,5 +1,5 @@
 TODO:
-- throw this on github
+- make github public
     - bugs I ran into, like the namespace difference in free lol
 - answer why the default is so much slower?
 - what happens with different pool sizes?
