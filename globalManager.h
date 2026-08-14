@@ -3,29 +3,71 @@
 #include "basicPoolMM.h"
 #include <stdlib.h>
 
-inline bool useCustomAllocator;
-
-inline void* customNew( size_t size )
+enum class ALLOCATOR_MODE
 {
-    if (useCustomAllocator)
+    DEFAULT,
+    BASIC_POOL,
+    BIT_MAP
+};
+
+inline ALLOCATOR_MODE allocatorMode;
+
+inline std::string getName(ALLOCATOR_MODE mode)
+{
+    switch (mode)
     {
+    case ALLOCATOR_MODE::DEFAULT:
+        return "Default";
+
+    case ALLOCATOR_MODE::BASIC_POOL:
+        return "Basic Pool";
+
+    case ALLOCATOR_MODE::BIT_MAP:
+        return "Bit Map";
+    }
+}
+
+inline void* customNew(size_t size)
+{
+    switch (allocatorMode)
+    {
+    case ALLOCATOR_MODE::DEFAULT:
+        return malloc(size);
+
+    case ALLOCATOR_MODE::BASIC_POOL:
+        return gBasicPoolMM.allocate(size);
+
+    case ALLOCATOR_MODE::BIT_MAP:
         return gBasicPoolMM.allocate(size);
     }
-    return malloc(size);
 }
 
 void* operator new(size_t size) { return customNew(size); }
 void* operator new[](size_t size) { return customNew(size); }
 
-
 inline void customDelete(void* pointerToDelete)
 {
-    if (useCustomAllocator)
+    switch (allocatorMode)
     {
+    case ALLOCATOR_MODE::DEFAULT:
+        return free(pointerToDelete);
+
+    case ALLOCATOR_MODE::BASIC_POOL:
         return gBasicPoolMM.free(pointerToDelete);
+        ;
+
+    case ALLOCATOR_MODE::BIT_MAP:
+        return gBasicPoolMM.free(pointerToDelete);
+        ;
     }
-    return free(pointerToDelete);
 }
 
-void operator delete(void* pointerToDelete) noexcept { return customDelete(pointerToDelete); }
-void operator delete[](void* pointerToDelete) noexcept { return customDelete(pointerToDelete); }
+void operator delete(void* pointerToDelete) noexcept
+{
+    return customDelete(pointerToDelete);
+}
+
+void operator delete[](void* pointerToDelete) noexcept
+{
+    return customDelete(pointerToDelete);
+}

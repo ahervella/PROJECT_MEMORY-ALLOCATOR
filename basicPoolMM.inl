@@ -4,10 +4,7 @@ inline BasicPoolMM::BasicPoolMM()
     expandPoolSize();
 }
 
-inline BasicPoolMM::~BasicPoolMM()
-{
-    cleanUp();
-}
+inline BasicPoolMM::~BasicPoolMM() { cleanUp(); }
 
 inline void* BasicPoolMM::allocate(size_t)
 {

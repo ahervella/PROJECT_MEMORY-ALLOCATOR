@@ -1,6 +1,12 @@
 TODO:
 - make github public
     - bugs I ran into, like the namespace difference in free lol
+    - differences between a 2008 post and now
+    - incorrect memset and array shenannigans in BitMapEntry, listing 12
+    - typedef use and aliases at the end because why?
+    - Incorrect insert call with unneeded & in listing 13
+    - unnecessary else in array portion of listing 13
+    - order of first few listings could be better
 - answer why the default is so much slower?
 - what happens with different pool sizes?
 - How do I adapt this to be modular for other data types? Does the tutorial specify?
@@ -8,7 +14,19 @@ TODO:
 - try out anki setup
 - organize into source and include (where do .inl typically go, source?)
 
-After:
+Thursday August 13th, 2026
+- First draft is all set, will need to test compiling and then create a bunch of tests
+- about to try first anki export befor wrapping up
+- will need to or want to implement large arrays before moving on to multi threading
+- fix intellisense
+
+as well as maybe better use of small arrays with big holes
+
+
+
+After project:
+- test thoroughly and clean up
+- post on that stack overflow post and anywhere else, message ibm about isses:
+    - compile all issues, maybe reach out to creators?
 - spend a day learning some cmake or make file basics
 - vim motions and apply to vsc?
-- add paps new suggestion of wargames to list

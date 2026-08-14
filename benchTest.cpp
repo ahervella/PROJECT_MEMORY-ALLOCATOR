@@ -1,11 +1,11 @@
-#include <chrono>
-#include <iostream>
 #include "complex.h"
 #include "globalManager.h"
+#include <chrono>
+#include <iostream>
 
-auto benchMark(bool useCustomAllocator)
+auto benchMark(ALLOCATOR_MODE allocatorMode)
 {
-    ::useCustomAllocator = useCustomAllocator;
+    ::allocatorMode = allocatorMode;
 
     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -27,24 +27,20 @@ auto benchMark(bool useCustomAllocator)
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
         stopTime - startTime);
 
-    std::cout
-        << std::endl
-        << std::endl
-        << (useCustomAllocator ? "--Custom Allocator--" : "--Default Allocator--")
-        << std::endl
-        <<" Performance time: "
-        << duration.count()
-        << " microseconds (or "
-        << duration.count() / 1000000.0
-        << " seconds)"
-        << std::endl
-        << std::endl;
+    std::cout << std::endl
+              << std::endl
+              << "--" + getName(allocatorMode) + "--" << std::endl
+              << " Performance time: " << duration.count()
+              << " microseconds (or " << duration.count() / 1000000.0
+              << " seconds)" << std::endl
+              << std::endl;
 }
 
-int main()//int argc, char* argv[])
+int main() // int argc, char* argv[])
 {
-    benchMark(true);
-    benchMark(false);
+    benchMark(ALLOCATOR_MODE::DEFAULT);
+    benchMark(ALLOCATOR_MODE::BASIC_POOL);
+    benchMark(ALLOCATOR_MODE::BIT_MAP);
 
     return 0;
 }
