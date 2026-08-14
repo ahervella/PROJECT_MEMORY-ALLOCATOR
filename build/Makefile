@@ -178,6 +178,54 @@ benchTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s
 .PHONY : benchTest.cpp.s
 
+bitMapMM.o: bitMapMM.cpp.o
+.PHONY : bitMapMM.o
+
+# target to build an object file
+bitMapMM.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o
+.PHONY : bitMapMM.cpp.o
+
+bitMapMM.i: bitMapMM.cpp.i
+.PHONY : bitMapMM.i
+
+# target to preprocess a source file
+bitMapMM.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.i
+.PHONY : bitMapMM.cpp.i
+
+bitMapMM.s: bitMapMM.cpp.s
+.PHONY : bitMapMM.s
+
+# target to generate assembly for a file
+bitMapMM.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.s
+.PHONY : bitMapMM.cpp.s
+
+bitMapMMEntry.o: bitMapMMEntry.cpp.o
+.PHONY : bitMapMMEntry.o
+
+# target to build an object file
+bitMapMMEntry.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o
+.PHONY : bitMapMMEntry.cpp.o
+
+bitMapMMEntry.i: bitMapMMEntry.cpp.i
+.PHONY : bitMapMMEntry.i
+
+# target to preprocess a source file
+bitMapMMEntry.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.i
+.PHONY : bitMapMMEntry.cpp.i
+
+bitMapMMEntry.s: bitMapMMEntry.cpp.s
+.PHONY : bitMapMMEntry.s
+
+# target to generate assembly for a file
+bitMapMMEntry.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MemoryAllocator.dir/build.make CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.s
+.PHONY : bitMapMMEntry.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -193,6 +241,12 @@ help:
 	@echo "... benchTest.o"
 	@echo "... benchTest.i"
 	@echo "... benchTest.s"
+	@echo "... bitMapMM.o"
+	@echo "... bitMapMM.i"
+	@echo "... bitMapMM.s"
+	@echo "... bitMapMMEntry.o"
+	@echo "... bitMapMMEntry.i"
+	@echo "... bitMapMMEntry.s"
 .PHONY : help
 
 

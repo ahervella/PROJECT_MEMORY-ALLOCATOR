@@ -10,6 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/basicPoolMM.cpp" "CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o" "gcc" "CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o.d"
   "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/benchTest.cpp" "CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o" "gcc" "CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o.d"
+  "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMM.cpp" "CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o" "gcc" "CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o.d"
+  "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMMEntry.cpp" "CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o" "gcc" "CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

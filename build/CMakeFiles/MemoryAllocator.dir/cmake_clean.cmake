@@ -3,6 +3,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o.d"
   "CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o"
   "CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o.d"
+  "CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o"
+  "CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o.d"
+  "CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o"
+  "CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o.d"
   "MemoryAllocator"
   "MemoryAllocator.pdb"
 )

@@ -100,19 +100,51 @@ CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/benchTest.cpp" -o CMakeFiles/MemoryAllocator.dir/benchTest.cpp.s
 
+CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o: CMakeFiles/MemoryAllocator.dir/flags.make
+CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o: /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/bitMapMM.cpp
+CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o: CMakeFiles/MemoryAllocator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o -MF CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o.d -o CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o -c "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMM.cpp"
+
+CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMM.cpp" > CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.i
+
+CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMM.cpp" -o CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.s
+
+CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o: CMakeFiles/MemoryAllocator.dir/flags.make
+CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o: /Users/alejandro/ADOBESHIT/C++\ Coding/MemAllocator/bitMapMMEntry.cpp
+CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o: CMakeFiles/MemoryAllocator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o -MF CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o.d -o CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o -c "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMMEntry.cpp"
+
+CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMMEntry.cpp" > CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.i
+
+CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/bitMapMMEntry.cpp" -o CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.s
+
 # Object files for target MemoryAllocator
 MemoryAllocator_OBJECTS = \
 "CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o" \
-"CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o"
+"CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o" \
+"CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o" \
+"CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o"
 
 # External object files for target MemoryAllocator
 MemoryAllocator_EXTERNAL_OBJECTS =
 
 MemoryAllocator: CMakeFiles/MemoryAllocator.dir/basicPoolMM.cpp.o
 MemoryAllocator: CMakeFiles/MemoryAllocator.dir/benchTest.cpp.o
+MemoryAllocator: CMakeFiles/MemoryAllocator.dir/bitMapMM.cpp.o
+MemoryAllocator: CMakeFiles/MemoryAllocator.dir/bitMapMMEntry.cpp.o
 MemoryAllocator: CMakeFiles/MemoryAllocator.dir/build.make
 MemoryAllocator: CMakeFiles/MemoryAllocator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable MemoryAllocator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable MemoryAllocator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MemoryAllocator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
