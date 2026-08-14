@@ -1,3 +1,0 @@
-/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles/MemoryAllocator.dir
-/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles/edit_cache.dir
-/Users/alejandro/ADOBESHIT/C++ Coding/MemAllocator/build/CMakeFiles/rebuild_cache.dir
