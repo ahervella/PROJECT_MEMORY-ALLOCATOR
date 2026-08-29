@@ -1,4 +1,5 @@
 #include "bitMapMM.h"
+#include "badAllocWithMsg.h"
 
 template <class T>
 void BitMapMM<T>::BitMapEntry::SetBit(int pos, bool flag)
@@ -21,13 +22,13 @@ void BitMapMM<T>::BitMapEntry::SetBit(int pos, bool flag)
     }
     else
     {
-        m_bitMap[index] &= (~0b1 << shift);
+        m_bitMap[index] &= (~(0b1 << shift));
         m_blocksAvailable--;
     }
 }
 
 template <class T>
-void BitMapMM<T>::BitMapEntry::SetMultipleBits(int pos, bool flag, int count)
+inline void BitMapMM<T>::BitMapEntry::SetMultipleBits(int pos, bool flag, int count)
 {
     for (int i = 0; i < count; i++)
     {
@@ -40,15 +41,15 @@ int BitMapMM<T>::BitMapEntry::SetFirstFreeBlockPos()
 {
     for (int i = 0; i < BIT_MAP_SIZE; i++)
     {
-        int val = GetBit(i);
+        bool val = GetBit(i);
         if (val)
         {
-            SetBit(i, true);
+            SetBit(i, false);
             return i;
         }
     }
 
+    throw BadAllocWithMsg(std::string("Error, Set First Free Block was not able to find a first free block!"));
+
     return -1;
 }
-
-template class BitMapMM<Complex>::BitMapEntry;

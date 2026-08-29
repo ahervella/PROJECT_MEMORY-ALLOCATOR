@@ -1,46 +1,142 @@
-#include "complex.h"
-#include "globalManager.h"
+
 #include <chrono>
+#include <ctime>
 #include <iostream>
 
-auto benchMark(ALLOCATOR_MODE allocatorMode)
-{
-    ::allocatorMode = allocatorMode;
+#include <benchmark/benchmark.h>
 
+#include "allocators/basicPoolMM.h"
+#include "allocators/customMemoryAllocator.h"
+#include "allocators/bitMapMM.h"
+#include "complex.h"
+
+constexpr int LOOP_COUNT = 5000;
+constexpr int ARRAY_SIZE = 1000;
+
+const std::string DEFAULT = "Default";
+const std::string BASIC_POOL = "Basic Pool";
+const std::string BASIC_POOL_TS = "Basic Pool (Thread Safe)";
+const std::string BIT_MAP = "Bit Map";
+const std::string BIT_MAP_TS = "Bit Map (Thread Safe)";
+
+void printResults(
+    const std::string &name,
+    std::chrono::time_point<std::chrono::high_resolution_clock> start,
+    std::chrono::time_point<std::chrono::high_resolution_clock> stop )
+{
+    auto duration =
+        std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+
+    std::cout << std::endl
+              << "--" + name + "--" << std::endl
+              << " Performance time for " << LOOP_COUNT << " loops of " << ARRAY_SIZE << " new/delete ops: " << std::endl
+              << duration.count() << " microseconds (or " << duration.count() / 1000000.0 << " seconds)" << std::endl
+              << std::endl; 
+}
+
+template <class T>
+auto controlBenchMarkSingleLoop( const int i )
+{
+    T* array[ARRAY_SIZE];
+    for (int j = 0; j < ARRAY_SIZE; j++)
+    {
+        benchmark::DoNotOptimize(array[j] = new T(i, j));
+    }
+
+    for (int j = 0; j < ARRAY_SIZE; j++)
+    {
+        delete array[j];
+    }
+}
+
+template<class T>
+auto controlBenchMark(const std::string &name )
+{
     auto startTime = std::chrono::high_resolution_clock::now();
 
-    for (int i = 0; i < 5000; i++)
+    for (int i = 0; i < LOOP_COUNT; i++)
     {
-        Complex* array[1000];
-        for (int j = 0; j < 1000; j++)
-        {
-            array[j] = new Complex(i, j);
-        }
-
-        for (int j = 0; j < 1000; j++)
-        {
-            delete array[j];
-        }
+        controlBenchMarkSingleLoop<T>(i);
     }
 
     auto stopTime = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-        stopTime - startTime);
-
-    std::cout << std::endl
-              << std::endl
-              << "--" + getName(allocatorMode) + "--" << std::endl
-              << " Performance time: " << duration.count()
-              << " microseconds (or " << duration.count() / 1000000.0
-              << " seconds)" << std::endl
-              << std::endl;
+    printResults( name, startTime, stopTime);
 }
 
-int main() // int argc, char* argv[])
+template <class AllocatorT, class T>
+void benchMarkSingleLoop( const int i, AllocatorT& allocator )
 {
-    benchMark(ALLOCATOR_MODE::DEFAULT);
-    benchMark(ALLOCATOR_MODE::BASIC_POOL);
-    benchMark(ALLOCATOR_MODE::BIT_MAP);
+    T* array[ARRAY_SIZE];
+    for (int j = 0; j < ARRAY_SIZE; j++)
+    {
+        benchmark::DoNotOptimize(array[j] = new (allocator) T(i, j));
+    }
 
-    return 0;
+    for (int j = 0; j < ARRAY_SIZE; j++)
+    {
+        operator delete<T>( array[j], allocator);
+    }
+}
+
+template<class AllocatorT, class T>
+auto benchMark( const std::string &name )
+{
+    AllocatorT allocator;
+
+    auto startTime = std::chrono::high_resolution_clock::now();
+
+    for (int i = 0; i < LOOP_COUNT; i++)
+    {
+        benchMarkSingleLoop<AllocatorT, T>(i, allocator);
+    }
+
+    auto stopTime = std::chrono::high_resolution_clock::now();
+
+    printResults( name, startTime, stopTime);
+}
+
+template<class T>
+static void BM_ControlAllocate(benchmark::State &state)
+{
+    for (auto _ : state)
+    {
+        controlBenchMarkSingleLoop<T>(9);
+    }
+}
+
+template<class AllocatorT, class T>
+static void BM_Allocate(benchmark::State &state, AllocatorT& allocator)
+{
+    for (auto _ : state)
+    {
+        benchMarkSingleLoop<AllocatorT, T>(9, allocator);
+    }
+}
+
+
+BasicPoolMM<Complex> basicPool;
+BasicPoolTSMM<Complex> basicPoolTS;
+BitMapMM<Complex> bitMap;
+BitMapTSMM<Complex> bitMapTS;
+
+BENCHMARK(BM_ControlAllocate<Complex>)->Name(DEFAULT);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BasicPoolMM<Complex>, Complex, BASIC_POOL, basicPool);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BasicPoolTSMM<Complex>, Complex, BASIC_POOL_TS, basicPoolTS);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BitMapMM<Complex>, Complex, BIT_MAP, bitMap);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BitMapTSMM<Complex>, Complex, BIT_MAP_TS, bitMapTS);
+
+int main(int argc, char* argv[])
+{
+    controlBenchMark<Complex>(DEFAULT);
+    benchMark<BasicPoolMM<Complex>, Complex>(BASIC_POOL);
+    benchMark<BasicPoolTSMM<Complex>, Complex>(BASIC_POOL_TS);
+    benchMark<BitMapMM<Complex>, Complex>(BIT_MAP);
+    benchMark<BitMapTSMM<Complex>, Complex>(BASIC_POOL_TS);
+
+   ::benchmark::Initialize(&argc, argv);
+   ::benchmark::RunSpecifiedBenchmarks();
+   ::benchmark::Shutdown();
+
+   std::cout<<std::endl;
 }

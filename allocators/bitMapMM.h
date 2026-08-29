@@ -12,15 +12,14 @@ template <class T>
 class BitMapMM : public IMemoryManager
 {
 public:
-    BitMapMM() {}
-    ~BitMapMM() {}
+    BitMapMM<T>() {}
+    ~BitMapMM<T>() {}
 
     void* allocate(size_t size);
-    void* allocateArray(size_t size);
-
-    // could this technically be a T* ? if an array is just that with offsets?
-    // Or what's the difference between T[]* and T*?
+    void* allocateArray(size_t);
     void free(void*);
+    void freeArray(void* p) { free(p); };
+
     std::vector<void*> GetMemoryPool();
 
 private:
@@ -31,7 +30,7 @@ private:
 
         BitMapEntry(int memoryPoolIndex) : MemPoolListIndex(memoryPoolIndex)
         {
-            memset(m_bitMap, 0xff, BIT_MAP_SIZE / sizeof(uint_fast8_t));
+            memset(m_bitMap, 0xff, BIT_MAP_ARRAY_LEN);
         }
 
         void SetBit(int pos, bool flag);
@@ -40,8 +39,9 @@ private:
 
         void GetIndexAndOffset(int pos, int &index, int &offset)
         {
-            index = pos / sizeof(uint_fast8_t);
-            offset = pos % sizeof(uint_fast8_t);
+            int bitCount = sizeof(uint_fast8_t) * 8;
+            index = pos / bitCount;
+            offset = pos % bitCount;
         }
 
         bool GetBit(int pos)
@@ -59,10 +59,12 @@ private:
             return (m_bitMap[index] >> shiftAmount & 0b1) > 0;
         }
 
-        int GetShiftFromPos(int offset) { return BIT_MAP_SIZE - offset - 1; }
+        int GetShiftFromPos(int offset) { return 8 - offset - 1; }
 
         int m_blocksAvailable = BIT_MAP_SIZE;
-        uint_fast8_t m_bitMap[BIT_MAP_SIZE / sizeof(uint_fast8_t)];
+        
+        static constexpr int BIT_MAP_ARRAY_LEN = BIT_MAP_SIZE / (sizeof(uint_fast8_t) * 8);
+        uint_fast8_t m_bitMap[BIT_MAP_ARRAY_LEN];
     };
 
     typedef struct ArrayMemoryInfo
@@ -79,6 +81,9 @@ private:
     void SetBlockBit(void* object, bool flag);
     void SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag);
 
+    void UpdateFreeSingleEntriesList(BitMapEntry* bitMapEntry);
+    void UpdateFreeArrayInfosList( ArrayMemoryInfo* freeArrayInfo, bool free);
+
     // hierarchy goes: chunks (given by OS) which have a corresponding
     // BitMapEntry, divided into blocks, which each correspond to 1 bit. One
     // block is the size of one object.
@@ -94,4 +99,5 @@ private:
     std::set<ArrayMemoryInfo*> m_freeArrayInfos;
 };
 
-inline BitMapMM<class Complex> gBitMapMM;
+#include "bitMapMM.inl"
+#include "bitMapMMEntry.inl"

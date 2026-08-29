@@ -3,9 +3,21 @@ project(MemoryAllocator)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-file(GLOB SOURCES CONFIGURE_DEPENDS ./*.cpp)
+file(GLOB SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+list(REMOVE_ITEM SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/AllocatorTests.cpp)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
-#target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -fsanitize=address -g)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -g)
-#target_link_options(${PROJECT_NAME} PRIVATE -fsanitize=address)
+find_package(benchmark REQUIRED)
+find_package(GTest REQUIRED)
+
+add_executable(AllocatorBenchmarks ${SOURCES})
+target_compile_options(AllocatorBenchmarks PRIVATE -Wall -Wextra -Werror -O2 )
+target_link_libraries(AllocatorBenchmarks PRIVATE benchmark::benchmark)
+
+enable_testing()
+add_executable(AllocatorTests AllocatorTests.cpp)
+target_compile_options(AllocatorTests PRIVATE -Wall -Wextra -Werror -g -fsanitize=address -fno-omit-frame-pointer)
+target_link_libraries(AllocatorTests PRIVATE GTest::gtest_main)
+target_link_options(AllocatorTests PRIVATE -fsanitize=address)
+
+include(GoogleTest)
+gtest_discover_tests(AllocatorTests)

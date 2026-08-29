@@ -1,13 +1,10 @@
 #include "bitMapMM.h"
-#include "complex.h"
+#include "badAllocWithMsg.h"
 
 template <class T>
 void* BitMapMM<T>::allocate(size_t size)
 {
-    if (size > sizeof(T))
-    {
-        return allocateArray(size);
-    }
+    TestForConcreteClass<T>( size );
 
     auto freeMapI = m_freeSingleEntries.begin();
     if (freeMapI != m_freeSingleEntries.end())
@@ -78,7 +75,6 @@ void* BitMapMM<T>::AllocateChunkAndInitBitMap()
 
     m_memoryPoolList.push_back(head);
 
-    // TODO: right way to do this?
     BitMapEntry entry(m_memoryPoolList.size() - 1);
     m_bitMapEntryList.push_back(entry);
     return head;
@@ -90,10 +86,7 @@ void* BitMapMM<T>::AllocateFirstFreeBlock(BitMapEntry* entry)
     T* p = static_cast<T*>(m_memoryPoolList[entry->MemPoolListIndex]);
     p += entry->SetFirstFreeBlockPos();
 
-    if (!entry->HasFreeBlock())
-    {
-        m_freeSingleEntries.erase(entry);
-    }
+    UpdateFreeSingleEntriesList(entry);
 
     return static_cast<void*>(p);
 }
@@ -101,7 +94,7 @@ void* BitMapMM<T>::AllocateFirstFreeBlock(BitMapEntry* entry)
 template <class T>
 void BitMapMM<T>::SetBlockBit(void* object, bool flag)
 {
-    for (int i = m_bitMapEntryList.size() - 1; i >= 0; i--)
+    for (size_t i = 0; i < m_bitMapEntryList.size(); i++)
     {
         BitMapEntry &mapEntry = m_bitMapEntryList[i];
         void* entryHead = m_memoryPoolList[i];
@@ -114,21 +107,50 @@ void BitMapMM<T>::SetBlockBit(void* object, bool flag)
 
         T* headTypedPtr = static_cast<T*>(entryHead);
         bool withinUpperBound = (headTypedPtr + BIT_MAP_SIZE - 1) >= object;
-        if (withinUpperBound)
+        if (!withinUpperBound)
         {
             continue;
         }
 
         int position = static_cast<T*>(object) - headTypedPtr;
         mapEntry.SetBit(position, flag);
+
+        UpdateFreeSingleEntriesList( &mapEntry);
+        break;
     }
 }
 
 template <class T>
-void BitMapMM<T>::SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag)
+inline void BitMapMM<T>::SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag)
 {
     m_bitMapEntryList[info->MemPoolListIndex].SetMultipleBits(
         info->StartPosition, flag, info->Length);
+
+    UpdateFreeArrayInfosList(info, flag);
 }
 
-template class BitMapMM<Complex>;
+template <class T>
+void BitMapMM<T>::UpdateFreeSingleEntriesList( BitMapEntry* entry )
+{
+    if (entry->HasFreeBlock())
+    {
+        m_freeSingleEntries.insert(entry);
+    }
+    else
+    {
+        m_freeSingleEntries.erase(entry);
+    }
+}
+
+template <class T>
+void BitMapMM<T>::UpdateFreeArrayInfosList(ArrayMemoryInfo* arrayInfo, bool free)
+{
+    if (free)
+    {
+        m_freeArrayInfos.insert(arrayInfo);
+    }
+    else
+    {
+        m_freeArrayInfos.erase(arrayInfo);
+    }
+}
