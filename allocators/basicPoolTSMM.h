@@ -6,25 +6,28 @@ template <class T>
 class BasicPoolTSMM : public BasicPoolMM<T>
 {
 public:
-    virtual void* allocate(size_t size)
+    BasicPoolTSMM<T>(){};
+    ~BasicPoolTSMM<T>() {};
+    
+    void* allocate(size_t size) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
         return BasicPoolMM<T>::allocate(size);
     }
 
-    virtual void* allocateArray(size_t size)
+    void* allocateArray(size_t size) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
         return BasicPoolMM<T>::allocateArray(size);
     }
 
-    virtual void free(void* p)
+    void free(void* p) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
         BasicPoolMM<T>::free(p);
     }
 
-    virtual void freeArray(void* p)
+    void freeArray(void* p) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
         BasicPoolMM<T>::freeArray(p);

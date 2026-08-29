@@ -14,23 +14,23 @@ private:
         FreeStore* next;
     };
 
-    virtual void expandPoolSize();
-    virtual void cleanUp();
+    void expandPoolSize();
+    void cleanUp();
 
     FreeStore* m_freeStoreHead;
 
 public:
     BasicPoolMM<T>();
-    virtual ~BasicPoolMM<T>();
-    virtual void* allocate(size_t);
-    virtual void* allocateArray(size_t size)
+    ~BasicPoolMM<T>();
+    void* allocate(size_t) override;
+    void* allocateArray(size_t size) override
     {
-        //cannot allocate object array
+        // cannot allocate object array due to non-adjacent nodes
         return std::malloc(size);
     }
 
-    virtual void free(void*);
-    virtual void freeArray(void* p)
+    void free(void*) override;
+    void freeArray(void* p) override
     {
         // cannot allocate object array
         std::free(p);

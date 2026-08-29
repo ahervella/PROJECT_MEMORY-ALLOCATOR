@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <new>
 #include <string>
+#include <typeinfo> 
 
 class BadAllocWithMsg : public std::bad_alloc
 {

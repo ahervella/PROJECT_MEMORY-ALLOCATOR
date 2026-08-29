@@ -15,10 +15,11 @@ public:
     BitMapMM<T>() {}
     ~BitMapMM<T>() {}
 
-    void* allocate(size_t size);
-    void* allocateArray(size_t);
-    void free(void*);
-    void freeArray(void* p) { free(p); };
+    void* allocate(size_t size) override;
+    void* allocateArray(size_t) override;
+    void free(void*) override;
+    //need to specify this free so we don't trigger a possibly overriden free version
+    void freeArray(void* p) override { BitMapMM<T>::free(p); };
 
     std::vector<void*> GetMemoryPool();
 
@@ -95,6 +96,10 @@ private:
 
     std::map<void*, ArrayMemoryInfo> m_arrayInfoMap;
 
+    // only save to do with respect to the m_bitMapEntryList because that only
+    // ever changes size once this free list is empty, otherwise would need a
+    // pointer stable upon growth structure like std::deque
+    
     std::set<BitMapEntry*> m_freeSingleEntries;
     std::set<ArrayMemoryInfo*> m_freeArrayInfos;
 };

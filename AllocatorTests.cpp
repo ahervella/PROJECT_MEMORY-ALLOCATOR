@@ -124,7 +124,8 @@ TYPED_TEST(AllocatorTest, ArrayAllocateAndFreeRoundTrips)
 
     for (int i = 0; i < kCount; i++)
     {
-        new (&arr[i]) TestObj(i, i + 100);
+        arr[i].a = i;
+        arr[i].b = i + 100;
     }
 
     for (int i = 0; i < kCount; i++)
@@ -134,7 +135,7 @@ TYPED_TEST(AllocatorTest, ArrayAllocateAndFreeRoundTrips)
 
     }
 
-    operator delete<TestObj>(arr, this->allocator);
+    operator delete[]<TestObj>(arr, this->allocator, kCount);
 }
 
 template <class AllocatorT>

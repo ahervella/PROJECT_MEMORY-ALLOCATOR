@@ -4,6 +4,7 @@
 #include "basicPoolTSMM.h"
 #include "bitMapMM.h"
 #include "bitMapTSMM.h"
+#include <cstddef>
 
 inline void* operator new(size_t size, IMemoryManager &allocator)
 {
@@ -23,8 +24,12 @@ inline void operator delete(void* p, IMemoryManager &allocator)
 }
 
 template<class T>
-inline void operator delete[](void* p, IMemoryManager &allocator)
+inline void operator delete[](void* p, IMemoryManager &allocator, size_t length )
 {
-    static_cast<T*>(p)->~T();
+    T* t = static_cast<T*>(p);
+    for (size_t i = 0; i < length; i++, t++)
+    {
+        t->~T();
+    }
     allocator.freeArray(p);
 }

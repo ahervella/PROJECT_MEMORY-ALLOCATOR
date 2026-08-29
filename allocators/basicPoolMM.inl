@@ -39,12 +39,25 @@ void BasicPoolMM<T>::expandPoolSize()
 {
     size_t size = std::max(sizeof(T), sizeof(FreeStore));
 
-    FreeStore* head = reinterpret_cast<FreeStore*>(malloc(size));
+    void* p = malloc(size);
+    if (!p)
+    {
+       throw BadAllocWithMsg(std::string("Error, malloc returned null pointer!")); 
+    }
+    
+    FreeStore* head = static_cast<FreeStore*>(p);
     m_freeStoreHead = head;
 
-    for (int i = 0; i < POOLSIZE; i++)
+    //already did head, so - 1
+    for (int i = 0; i < POOLSIZE - 1; i++)
     {
-        head->next = reinterpret_cast<FreeStore*>(malloc(size));
+        void* p = malloc(size);
+        if (!p)
+        {
+            throw BadAllocWithMsg(std::string("Error, malloc returned null pointer!"));
+        }
+        
+        head->next = static_cast<FreeStore*>(p);
         head = head->next;
     }
 
