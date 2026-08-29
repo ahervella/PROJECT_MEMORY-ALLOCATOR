@@ -1,18 +1,18 @@
-#include "basicPoolMM.h"
+#include "basicPoolAllocator.h"
 #include "badAllocWithMsg.h"
 
 template<class T>
-inline BasicPoolMM<T>::BasicPoolMM()
+inline BasicPoolAllocator<T>::BasicPoolAllocator()
 {
     m_freeStoreHead = 0;
     expandPoolSize();
 }
 
 template<class T>
-inline BasicPoolMM<T>::~BasicPoolMM() { cleanUp(); }
+inline BasicPoolAllocator<T>::~BasicPoolAllocator() { cleanUp(); }
 
 template<class T>
-void* BasicPoolMM<T>::allocate(size_t size)
+void* BasicPoolAllocator<T>::allocate(size_t size)
 {
     TestForConcreteClass<T>( size );
     
@@ -27,7 +27,7 @@ void* BasicPoolMM<T>::allocate(size_t size)
 }
 
 template<class T>
-inline void BasicPoolMM<T>::free(void* deleted)
+inline void BasicPoolAllocator<T>::free(void* deleted)
 {
     FreeStore* head = static_cast<FreeStore*>(deleted);
     head->next = m_freeStoreHead;
@@ -35,7 +35,7 @@ inline void BasicPoolMM<T>::free(void* deleted)
 }
 
 template<class T>
-void BasicPoolMM<T>::expandPoolSize()
+void BasicPoolAllocator<T>::expandPoolSize()
 {
     size_t size = std::max(sizeof(T), sizeof(FreeStore));
 
@@ -65,7 +65,7 @@ void BasicPoolMM<T>::expandPoolSize()
 }
 
 template<class T>
-void BasicPoolMM<T>::cleanUp()
+void BasicPoolAllocator<T>::cleanUp()
 {
     while (m_freeStoreHead)
     {

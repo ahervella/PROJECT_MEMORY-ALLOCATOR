@@ -1,8 +1,8 @@
-#include "bitMapMM.h"
+#include "bitMapAllocator.h"
 #include "badAllocWithMsg.h"
 
 template <class T>
-void* BitMapMM<T>::allocate(size_t size)
+void* BitMapAllocator<T>::allocate(size_t size)
 {
     TestForConcreteClass<T>( size );
 
@@ -20,7 +20,7 @@ void* BitMapMM<T>::allocate(size_t size)
 }
 
 template <class T>
-void* BitMapMM<T>::allocateArray(size_t size)
+void* BitMapAllocator<T>::allocateArray(size_t size)
 {
     // TODO: allow for array chunks to have multiple arrays if fit
     // TODO: allow for array's bigger than chunks by wrapping to next available
@@ -44,7 +44,7 @@ void* BitMapMM<T>::allocateArray(size_t size)
 }
 
 template <class T>
-void BitMapMM<T>::free(void* p)
+void BitMapAllocator<T>::free(void* p)
 {
     auto kvp = m_arrayInfoMap.find(p);
     if (kvp == m_arrayInfoMap.end())
@@ -58,7 +58,7 @@ void BitMapMM<T>::free(void* p)
 }
 
 template <class T>
-void* BitMapMM<T>::AllocateArrayMemoryAndInitInfo(size_t size)
+void* BitMapAllocator<T>::AllocateArrayMemoryAndInitInfo(size_t size)
 {
     // TODO: wrap to another chunk if size exceeds chunk size
     size_t length = size / sizeof(T);
@@ -68,7 +68,7 @@ void* BitMapMM<T>::AllocateArrayMemoryAndInitInfo(size_t size)
 }
 
 template <class T>
-void* BitMapMM<T>::AllocateChunkAndInitBitMap()
+void* BitMapAllocator<T>::AllocateChunkAndInitBitMap()
 {
     size_t size = sizeof(T) * BIT_MAP_SIZE;
     void* head = malloc(size);
@@ -81,7 +81,7 @@ void* BitMapMM<T>::AllocateChunkAndInitBitMap()
 }
 
 template <class T>
-void* BitMapMM<T>::AllocateFirstFreeBlock(BitMapEntry* entry)
+void* BitMapAllocator<T>::AllocateFirstFreeBlock(BitMapEntry* entry)
 {
     T* p = static_cast<T*>(m_memoryPoolList[entry->MemPoolListIndex]);
     p += entry->SetFirstFreeBlockPos();
@@ -92,7 +92,7 @@ void* BitMapMM<T>::AllocateFirstFreeBlock(BitMapEntry* entry)
 }
 
 template <class T>
-void BitMapMM<T>::SetBlockBit(void* object, bool flag)
+void BitMapAllocator<T>::SetBlockBit(void* object, bool flag)
 {
     for (size_t i = 0; i < m_bitMapEntryList.size(); i++)
     {
@@ -121,7 +121,7 @@ void BitMapMM<T>::SetBlockBit(void* object, bool flag)
 }
 
 template <class T>
-inline void BitMapMM<T>::SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag)
+inline void BitMapAllocator<T>::SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag)
 {
     m_bitMapEntryList[info->MemPoolListIndex].SetMultipleBits(
         info->StartPosition, flag, info->Length);
@@ -130,7 +130,7 @@ inline void BitMapMM<T>::SetMultipleBlockBits(ArrayMemoryInfo* info, bool flag)
 }
 
 template <class T>
-void BitMapMM<T>::UpdateFreeSingleEntriesList( BitMapEntry* entry )
+void BitMapAllocator<T>::UpdateFreeSingleEntriesList( BitMapEntry* entry )
 {
     if (entry->HasFreeBlock())
     {
@@ -143,7 +143,7 @@ void BitMapMM<T>::UpdateFreeSingleEntriesList( BitMapEntry* entry )
 }
 
 template <class T>
-void BitMapMM<T>::UpdateFreeArrayInfosList(ArrayMemoryInfo* arrayInfo, bool free)
+void BitMapAllocator<T>::UpdateFreeArrayInfosList(ArrayMemoryInfo* arrayInfo, bool free)
 {
     if (free)
     {

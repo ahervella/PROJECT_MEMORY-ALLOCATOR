@@ -5,9 +5,9 @@
 
 #include <benchmark/benchmark.h>
 
-#include "allocators/basicPoolMM.h"
+#include "allocators/basicPoolAllocator.h"
 #include "allocators/customMemoryAllocator.h"
-#include "allocators/bitMapMM.h"
+#include "allocators/bitMapAllocator.h"
 #include "complex.h"
 
 constexpr int LOOP_COUNT = 5000;
@@ -115,24 +115,24 @@ static void BM_Allocate(benchmark::State &state, AllocatorT& allocator)
 }
 
 
-BasicPoolMM<Complex> basicPool;
-BasicPoolTSMM<Complex> basicPoolTS;
-BitMapMM<Complex> bitMap;
-BitMapTSMM<Complex> bitMapTS;
+BasicPoolAllocator<Complex> basicPool;
+BasicPoolTSAllocator<Complex> basicPoolTS;
+BitMapAllocator<Complex> bitMap;
+BitMapTSAllocator<Complex> bitMapTS;
 
 BENCHMARK(BM_ControlAllocate<Complex>)->Name(DEFAULT);
-BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BasicPoolMM<Complex>, Complex, BASIC_POOL, basicPool);
-BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BasicPoolTSMM<Complex>, Complex, BASIC_POOL_TS, basicPoolTS);
-BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BitMapMM<Complex>, Complex, BIT_MAP, bitMap);
-BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BitMapTSMM<Complex>, Complex, BIT_MAP_TS, bitMapTS);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BasicPoolAllocator<Complex>, Complex, BASIC_POOL, basicPool);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BasicPoolTSAllocator<Complex>, Complex, BASIC_POOL_TS, basicPoolTS);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BitMapAllocator<Complex>, Complex, BIT_MAP, bitMap);
+BENCHMARK_TEMPLATE2_CAPTURE(BM_Allocate, BitMapTSAllocator<Complex>, Complex, BIT_MAP_TS, bitMapTS);
 
 int main(int argc, char* argv[])
 {
     controlBenchMark<Complex>(DEFAULT);
-    benchMark<BasicPoolMM<Complex>, Complex>(BASIC_POOL);
-    benchMark<BasicPoolTSMM<Complex>, Complex>(BASIC_POOL_TS);
-    benchMark<BitMapMM<Complex>, Complex>(BIT_MAP);
-    benchMark<BitMapTSMM<Complex>, Complex>(BASIC_POOL_TS);
+    benchMark<BasicPoolAllocator<Complex>, Complex>(BASIC_POOL);
+    benchMark<BasicPoolTSAllocator<Complex>, Complex>(BASIC_POOL_TS);
+    benchMark<BitMapAllocator<Complex>, Complex>(BIT_MAP);
+    benchMark<BitMapTSAllocator<Complex>, Complex>(BASIC_POOL_TS);
 
    ::benchmark::Initialize(&argc, argv);
    ::benchmark::RunSpecifiedBenchmarks();

@@ -1,5 +1,5 @@
 #pragma once
-#include "iMemoryManager.h"
+#include "iMemoryAllocator.h"
 #include <map>
 #include <set>
 #include <vector>
@@ -9,17 +9,17 @@
 #define BIT_MAP_SIZE 32
 
 template <class T>
-class BitMapMM : public IMemoryManager
+class BitMapAllocator : public IMemoryAllocator
 {
 public:
-    BitMapMM<T>() {}
-    ~BitMapMM<T>() {}
+    BitMapAllocator<T>() {}
+    ~BitMapAllocator<T>() {}
 
     void* allocate(size_t size) override;
     void* allocateArray(size_t) override;
     void free(void*) override;
     //need to specify this free so we don't trigger a possibly overriden free version
-    void freeArray(void* p) override { BitMapMM<T>::free(p); };
+    void freeArray(void* p) override { BitMapAllocator<T>::free(p); };
 
     std::vector<void*> GetMemoryPool();
 
@@ -104,5 +104,5 @@ private:
     std::set<ArrayMemoryInfo*> m_freeArrayInfos;
 };
 
-#include "bitMapMM.inl"
-#include "bitMapMMEntry.inl"
+#include "bitMapAllocator.inl"
+#include "bitMapAllocatorEntry.inl"

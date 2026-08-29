@@ -1,8 +1,8 @@
-#include "bitMapMM.h"
+#include "bitMapAllocator.h"
 #include "badAllocWithMsg.h"
 
 template <class T>
-void BitMapMM<T>::BitMapEntry::SetBit(int pos, bool flag)
+void BitMapAllocator<T>::BitMapEntry::SetBit(int pos, bool flag)
 {
     int index, offset;
     GetIndexAndOffset(pos, index, offset);
@@ -28,7 +28,7 @@ void BitMapMM<T>::BitMapEntry::SetBit(int pos, bool flag)
 }
 
 template <class T>
-inline void BitMapMM<T>::BitMapEntry::SetMultipleBits(int pos, bool flag, int count)
+inline void BitMapAllocator<T>::BitMapEntry::SetMultipleBits(int pos, bool flag, int count)
 {
     for (int i = 0; i < count; i++)
     {
@@ -37,7 +37,7 @@ inline void BitMapMM<T>::BitMapEntry::SetMultipleBits(int pos, bool flag, int co
 }
 
 template <class T>
-int BitMapMM<T>::BitMapEntry::SetFirstFreeBlockPos()
+int BitMapAllocator<T>::BitMapEntry::SetFirstFreeBlockPos()
 {
     for (int i = 0; i < BIT_MAP_SIZE; i++)
     {

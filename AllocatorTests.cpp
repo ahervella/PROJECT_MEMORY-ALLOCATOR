@@ -27,10 +27,10 @@ protected:
 };
 
 using AllocatorTypes = ::testing::Types<
-    BasicPoolMM<TestObj>,
-    BasicPoolTSMM<TestObj>,
-    BitMapMM<TestObj>,
-    BitMapTSMM<TestObj>>;
+    BasicPoolAllocator<TestObj>,
+    BasicPoolTSAllocator<TestObj>,
+    BitMapAllocator<TestObj>,
+    BitMapTSAllocator<TestObj>>;
 TYPED_TEST_SUITE(AllocatorTest, AllocatorTypes);
 
 TYPED_TEST(AllocatorTest, AllocateReturnsUsableMemory)
@@ -87,7 +87,7 @@ TYPED_TEST(AllocatorTest, FreedSlotIsReusable)
 
 TYPED_TEST(AllocatorTest, AllocatingPastOneChunkStillWorks)
 {
-    //BasicPoolMM::POOLSIZE and BitMapMM::BIT_MAP_SIZE are 32
+    //BasicPoolAllocator::POOLSIZE and BitMapAllocator::BIT_MAP_SIZE are 32
     constexpr int COUNT = 40;
     std::vector<void*> ptrs;
     for (int i = 0; i < COUNT; i++)
@@ -145,7 +145,7 @@ protected:
     AllocatorT allocator;
 };
 
-using ThreadSafeAllocatorTypes = ::testing::Types<BasicPoolTSMM<TestObj>, BitMapTSMM<TestObj>>;
+using ThreadSafeAllocatorTypes = ::testing::Types<BasicPoolTSAllocator<TestObj>, BitMapTSAllocator<TestObj>>;
 TYPED_TEST_SUITE(ThreadSafeAllocatorTest, ThreadSafeAllocatorTypes);
 
 TYPED_TEST(ThreadSafeAllocatorTest, ConcurrentAllocateFreeIsSafe)

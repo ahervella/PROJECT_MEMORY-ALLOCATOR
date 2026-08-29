@@ -1,12 +1,12 @@
 #pragma once
-#include "iMemoryManager.h"
+#include "iMemoryAllocator.h"
 #include <sys/types.h>
 #include <cstdlib>
 
 #define POOLSIZE 32
 
 template<class T>
-class BasicPoolMM : public IMemoryManager
+class BasicPoolAllocator : public IMemoryAllocator
 {
 private:
     struct FreeStore
@@ -20,8 +20,8 @@ private:
     FreeStore* m_freeStoreHead;
 
 public:
-    BasicPoolMM<T>();
-    ~BasicPoolMM<T>();
+    BasicPoolAllocator<T>();
+    ~BasicPoolAllocator<T>();
     void* allocate(size_t) override;
     void* allocateArray(size_t size) override
     {
@@ -38,4 +38,4 @@ public:
 };
 
 
-#include "basicPoolMM.inl"
+#include "basicPoolAllocator.inl"

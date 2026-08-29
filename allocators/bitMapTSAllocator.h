@@ -1,36 +1,36 @@
 #pragma once
-#include "bitMapMM.h"
+#include "bitMapAllocator.h"
 #include <mutex>
 
 template <class T>
-class BitMapTSMM : public BitMapMM<T>
+class BitMapTSAllocator : public BitMapAllocator<T>
 {
 public:
-    BitMapTSMM<T>(){}
-    ~BitMapTSMM<T>(){}
+    BitMapTSAllocator<T>(){}
+    ~BitMapTSAllocator<T>(){}
     
     void* allocate(size_t size) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        return BitMapMM<T>::allocate(size);
+        return BitMapAllocator<T>::allocate(size);
     }
 
     void* allocateArray(size_t size) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        return BitMapMM<T>::allocateArray(size);
+        return BitMapAllocator<T>::allocateArray(size);
     }
 
     void free(void* p) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        BitMapMM<T>::free(p);
+        BitMapAllocator<T>::free(p);
     }
 
     void freeArray(void* p) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        BitMapMM<T>::freeArray(p);
+        BitMapAllocator<T>::freeArray(p);
     }
 
 private:

@@ -1,11 +1,11 @@
 #pragma once
 #include <cstddef>
 
-class IMemoryManager
+class IMemoryAllocator
 {
 public:
-    IMemoryManager(){};
-    virtual ~IMemoryManager(){};
+    IMemoryAllocator(){};
+    virtual ~IMemoryAllocator(){};
     virtual void* allocate(size_t) = 0;
     virtual void* allocateArray(size_t) = 0;
     virtual void free(void*) = 0;
