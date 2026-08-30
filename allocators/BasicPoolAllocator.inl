@@ -1,5 +1,5 @@
-#include "basicPoolAllocator.h"
-#include "badAllocWithMsg.h"
+#include "BasicPoolAllocator.h"
+#include "BadAllocWithMsg.h"
 
 template<class T>
 inline BasicPoolAllocator<T>::BasicPoolAllocator()

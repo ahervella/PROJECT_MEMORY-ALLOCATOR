@@ -1,5 +1,5 @@
-#include "bitMapAllocator.h"
-#include "badAllocWithMsg.h"
+#include "BitMapAllocator.h"
+#include "BadAllocWithMsg.h"
 
 template <class T>
 void BitMapAllocator<T>::BitMapEntry::SetBit(int pos, bool flag)

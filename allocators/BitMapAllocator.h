@@ -1,5 +1,5 @@
 #pragma once
-#include "iMemoryAllocator.h"
+#include "IMemoryAllocator.h"
 #include <map>
 #include <set>
 #include <vector>
@@ -104,5 +104,5 @@ private:
     std::set<ArrayMemoryInfo*> m_freeArrayInfos;
 };
 
-#include "bitMapAllocator.inl"
-#include "bitMapAllocatorEntry.inl"
+#include "BitMapAllocator.inl"
+#include "BitMapAllocatorEntry.inl"

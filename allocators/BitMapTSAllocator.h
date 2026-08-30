@@ -1,36 +1,36 @@
 #pragma once
-#include "basicPoolAllocator.h"
+#include "BitMapAllocator.h"
 #include <mutex>
 
 template <class T>
-class BasicPoolTSAllocator : public BasicPoolAllocator<T>
+class BitMapTSAllocator : public BitMapAllocator<T>
 {
 public:
-    BasicPoolTSAllocator<T>(){};
-    ~BasicPoolTSAllocator<T>() {};
+    BitMapTSAllocator<T>(){}
+    ~BitMapTSAllocator<T>(){}
     
     void* allocate(size_t size) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        return BasicPoolAllocator<T>::allocate(size);
+        return BitMapAllocator<T>::allocate(size);
     }
 
     void* allocateArray(size_t size) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        return BasicPoolAllocator<T>::allocateArray(size);
+        return BitMapAllocator<T>::allocateArray(size);
     }
 
     void free(void* p) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        BasicPoolAllocator<T>::free(p);
+        BitMapAllocator<T>::free(p);
     }
 
     void freeArray(void* p) override
     {
         const std::lock_guard<std::mutex> lock(m_lock);
-        BasicPoolAllocator<T>::freeArray(p);
+        BitMapAllocator<T>::freeArray(p);
     }
 
 private:

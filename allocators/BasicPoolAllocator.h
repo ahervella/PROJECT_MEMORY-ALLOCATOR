@@ -1,5 +1,5 @@
 #pragma once
-#include "iMemoryAllocator.h"
+#include "IMemoryAllocator.h"
 #include <sys/types.h>
 #include <cstdlib>
 
@@ -38,4 +38,4 @@ public:
 };
 
 
-#include "basicPoolAllocator.inl"
+#include "BasicPoolAllocator.inl"

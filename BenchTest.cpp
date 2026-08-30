@@ -5,10 +5,10 @@
 
 #include <benchmark/benchmark.h>
 
-#include "allocators/basicPoolAllocator.h"
-#include "allocators/customMemoryAllocator.h"
-#include "allocators/bitMapAllocator.h"
-#include "complex.h"
+#include "allocators/BasicPoolAllocator.h"
+#include "allocators/CustomMemoryAllocator.h"
+#include "allocators/BitMapAllocator.h"
+#include "Complex.h"
 
 constexpr int LOOP_COUNT = 5000;
 constexpr int ARRAY_SIZE = 1000;

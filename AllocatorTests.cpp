@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "allocators/customMemoryAllocator.h"
-#include "allocators/badAllocWithMsg.h"
+#include "allocators/CustomMemoryAllocator.h"
+#include "allocators/BadAllocWithMsg.h"
 
 #include <algorithm>
 #include <atomic>
