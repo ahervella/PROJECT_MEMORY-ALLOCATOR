@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
     benchMark<BasicPoolAllocator<Complex>, Complex>(BASIC_POOL);
     benchMark<BasicPoolTSAllocator<Complex>, Complex>(BASIC_POOL_TS);
     benchMark<BitMapAllocator<Complex>, Complex>(BIT_MAP);
-    benchMark<BitMapTSAllocator<Complex>, Complex>(BASIC_POOL_TS);
+    benchMark<BitMapTSAllocator<Complex>, Complex>(BIT_MAP_TS);
 
    ::benchmark::Initialize(&argc, argv);
    ::benchmark::RunSpecifiedBenchmarks();
