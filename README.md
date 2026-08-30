@@ -14,25 +14,13 @@ The project began with the 2008 IBM Developer tutorial [*Memory management: Buil
 - [Project Goals](#project-goals)
 - [Allocator Designs](#allocator-designs)
   - [Single-Class Fixed-Size Pool Allocator](#single-class-fixed-size-pool-allocator)
-- [Bitmap Pool Allocator](#bitmap-pool-allocator)
-- [Array Allocation](#array-allocation)
-- [Thread-Safe Variants](#thread-safe-variants)
+  - [Bitmap Pool Allocator](#bitmap-pool-allocator)
+    - [Array Allocation](#array-allocation)
+  - [Thread-Safe Variants](#thread-safe-variants)
 - [Beyond the Tutorial](#beyond-the-tutorial)
-  - [C++ Object Lifetime and Custom Operators](#c-object-lifetime-and-custom-operators)
-  - [Extending it into something usable](#extending-it-into-something-usable)
-- [My Extensions and Adaptations](#my-extensions-and-adaptations)
 - [Results](#results)
 - [C++ Concepts Explored](#c-concepts-explored)
-  - [Memory and Object Lifetime](#memory-and-object-lifetime)
-  - [Language Semantics and Type System](#language-semantics-and-type-system)
-  - [Compilation and Build System](#compilation-and-build-system)
-  - [Testing and Performance Tooling](#testing-and-performance-tooling)
-  - [Data Structures and Low-Level Behavior](#data-structures-and-low-level-behavior)
 - [Future Improvements](#future-improvements)
-  - [Memory Management](#memory-management)
-  - [Array Allocation](#array-allocation-1)
-  - [Allocation Performance](#allocation-performance)
-  - [Concurrency](#concurrency)
 
 ---
 
@@ -119,7 +107,7 @@ This design is particularly suited to workloads involving large numbers of short
 
 ---
 
-# Bitmap Pool Allocator
+## Bitmap Pool Allocator
 
 The bitmap allocator uses a different strategy for tracking free blocks.
 
@@ -172,9 +160,7 @@ When an object is freed:
 - Requires separate metadata for tracking allocations that span multiple blocks.
 - The pool (chunk count) only grows and never shrinks during the lifetime of the allocator.
 
----
-
-# Array Allocation
+## Array Allocation
 
 Array support is handled separately: dedicated chunks are reserved just for array allocations, tracked via a map from array head pointer to an `ArrayMemoryInfo` (length + chunk offset). Because the bitmap guarantees block order matches OS memory order within a chunk, arrays can be allocated as a single run of contiguous blocks. Freed arrays are tracked for reuse by future array allocations that fit in the freed space.
 
@@ -191,7 +177,7 @@ Potential improvements include maintaining the size of free regions, merging adj
 
 ---
 
-# Thread-Safe Variants
+## Thread-Safe Variants
 
 Both allocator strategies have thread-safe variants:
 
@@ -228,25 +214,6 @@ Other features were impleneted to make it a much more practicale use case that I
 - **A custom exception type (`BadAllocWithMsg`)** thrown on allocation failure, so failures are reported explicitly and distinguishably rather than silently returning null or aborting.
 - **A full test suite** (`AllocatorTests.cpp`, GoogleTest) — typed tests that run the same allocate/free/array/oversized-request/reuse checks across all four allocator types via `TYPED_TEST_SUITE`, plus a dedicated multi-threaded stress test hammering the two thread-safe allocators concurrently and checking for address collisions. Built with AddressSanitizer enabled to catch use-after-free/overflow bugs the assertions alone wouldn't.
 - **Benchmarking against the default allocator** (`benchTest.cpp`, Google Benchmark) — using `DoNotOptimize`/`ClobberMemory` to stop the compiler from eliminating the allocate/free calls being measured, which a naive hand-rolled timing loop under `-O2` would be vulnerable to. Deliberately built as a separate CMake target from the test suite (`-O2`, no sanitizer) since benchmarking and ASan-based correctness testing want opposite compiler settings.
-
----
-
-# My Extensions and Adaptations
-
-The IBM tutorial provided the foundation for the allocator designs, including implementations of both the basic pool and bitmap approaches, as well as discussion of thread-safe allocation and array/contiguous memory allocation, but lacked the full implementation details due to broken links to the source files. I used these designs as a starting point and independently implemented, adapted, integrated, tested, and evaluated them as a complete C++ project.
-
-My additions and adaptations include:
-
-- Created a reusable header-based interface for integrating the allocators into a C++ project.
-- Integrated the allocators with custom `new`, `new[]`, `delete`, and `delete[]` operators.
-- Implemented explicit object destruction and array lifetime management around the custom allocation operators.
-- Independently implemented the array allocation and contiguous block tracking concepts outlined by the tutorial, whose referenced source implementations were no longer available.
-- Added metadata for tracking array allocations and recycling previously freed array regions.
-- Built Google Test coverage across all allocator variants.
-- Added multithreaded correctness tests to validate the thread-safe implementations.
-- Integrated AddressSanitizer into the test configuration to validate memory safety.
-- Added Google Benchmark performance measurements and compared the custom allocators against standard `new`/`delete`.
-- Identified potential improvements to the array allocation system, including free-region coalescing, reduced internal fragmentation, and multi-chunk allocations.
 
 ---
 
