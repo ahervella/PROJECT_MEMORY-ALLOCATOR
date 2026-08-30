@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "allocators/CustomMemoryAllocator.h"
+#include "CustomMemoryAllocator.h"
 #include "allocators/BadAllocWithMsg.h"
 
 #include <algorithm>

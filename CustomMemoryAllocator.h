@@ -1,9 +1,9 @@
 #pragma once
-#include "IMemoryAllocator.h"
-#include "BasicPoolAllocator.h"
-#include "BasicPoolTSAllocator.h"
-#include "BitMapAllocator.h"
-#include "BitMapTSAllocator.h"
+#include "allocators/IMemoryAllocator.h"
+#include "allocators/BasicPoolAllocator.h"
+#include "allocators/BasicPoolTSAllocator.h"
+#include "allocators/BitMapAllocator.h"
+#include "allocators/BitMapTSAllocator.h"
 #include <cstddef>
 
 inline void* operator new(size_t size, IMemoryAllocator &allocator)

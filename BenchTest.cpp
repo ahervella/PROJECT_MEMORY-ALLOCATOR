@@ -6,7 +6,7 @@
 #include <benchmark/benchmark.h>
 
 #include "allocators/BasicPoolAllocator.h"
-#include "allocators/CustomMemoryAllocator.h"
+#include "CustomMemoryAllocator.h"
 #include "allocators/BitMapAllocator.h"
 #include "Complex.h"
 
